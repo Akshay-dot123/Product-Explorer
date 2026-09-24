@@ -21,6 +21,8 @@ const matchesCategory = category === "all" || product.category === category;
 const matchesSearch = product.title.toLowerCase().includes(search.toLowerCase());
 return matchesCategory && matchesSearch;
 5. Added helpful error state to the user when the request fails.
+6. key={index} here key is tied to where the item is in the array (0,1, 2,3...), so if the array changes, the positions shift
+Solution: key={product.id} here key is tied to what the item actually is (a unique identifier). Identity stays the same regardless of position
 
 ## Features I completed
 
