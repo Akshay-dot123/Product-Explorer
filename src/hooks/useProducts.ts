@@ -6,7 +6,7 @@ import { Product } from "@/types/product";
 // Fetches the product catalogue from the public API.
 export function useProducts() {
   // NOTE: the Product type exists in src/types/product.ts.
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
