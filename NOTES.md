@@ -11,6 +11,16 @@ Solution: Change the dependency array to an empty array []. SO here only once co
 2. Using 'any' type defeats the purpose of TypeScript. Change the state to useState<Product[]>([]) and type the parsed JSON as const data: Product[] = await res.json();
 3. if (!product) return null;instantly mount and unmount components.
 Solution: <AnimatePresence> detects when a child is removed from the React tree and delays the actual unmounting just long enough to play an exit animation.
+4. visibleProducts function in pages.tsx uses if pattern which only checks 1 thing at a time.
+if (category !== "all") {
+  return product.category === category;  // Only checks category
+}
+return product.title.includes(search);   // Only checks search
+Solution: To work together we are changing code to match both category and search option both at once like this:
+const matchesCategory = category === "all" || product.category === category;
+const matchesSearch = product.title.toLowerCase().includes(search.toLowerCase());
+return matchesCategory && matchesSearch;
+5. Added helpful error state to the user when the request fails.
 
 ## Features I completed
 

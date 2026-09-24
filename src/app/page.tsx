@@ -19,10 +19,9 @@ export default function HomePage() {
   }, [products]);
 
   const visibleProducts = products.filter((product) => {
-    if (category !== "all") {
-      return product.category === category;
-    }
-    return product.title.includes(search);
+    const matchesCategory = category === "all" || product.category === category;
+    const matchesSearch = product.title.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
   });
 
   return (
@@ -48,8 +47,13 @@ export default function HomePage() {
         TODO(candidate): the hook already exposes `error`, but nothing renders it.
         Show a helpful error state to the user when the request fails.
       */}
-
-      <ProductGrid products={visibleProducts} onSelect={setSelected} />
+      {error && (
+        <div className="mt-8 rounded-lg border border-red-200 bg-red-50 p-6 text-center">
+          <p className="text-red-800 font-medium">Failed to load products</p>
+          <p className="mt-2 text-sm text-red-600">{error}</p>
+        </div>
+      )}
+      {!error && !loading && <ProductGrid products={visibleProducts} onSelect={setSelected} />}
 
       <ProductModal product={selected} onClose={() => setSelected(null)} />
     </main>
