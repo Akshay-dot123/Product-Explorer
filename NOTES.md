@@ -23,6 +23,7 @@ return matchesCategory && matchesSearch;
 5. Added helpful error state to the user when the request fails.
 6. key={index} here key is tied to where the item is in the array (0,1, 2,3...), so if the array changes, the positions shift
 Solution: key={product.id} here key is tied to what the item actually is (a unique identifier). Identity stays the same regardless of position
+7. Removed the dynamic timestamp. This ensures the server and client generate the exact same initial HTML, preventing the mismatch.
 
 ## Features I completed
 
